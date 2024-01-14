@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/letter.dart'; // Import the Letter model
+import '../models/chunk_hypothesis.dart';
+import '../models/letter.dart';
+import '../models/letter_chunk.dart'; // Import the Letter model
 
 class LettersService {
   static const String _baseUrl = 'http://localhost:8080';
@@ -12,7 +14,6 @@ class LettersService {
         'pageSize': pageSize.toString(),
       }));
 
-      print("IM HERE");
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         return data.map((e) => Letter.fromMap(e)).toList();
@@ -23,7 +24,44 @@ class LettersService {
         throw Exception('Failed to load letters');
       }
     } catch (e) {
-      print('Error fetching scenario skills: $e');
+      print('Error fetching letters: $e');
+      return [];
+    }
+  }
+
+  // New method to fetch letter chunks
+  Future<List<LetterChunk>> fetchLetterChunks(int letterId) async {
+    try {
+      final response = await http.get(Uri.parse('$_baseUrl/get-letter-chunks-by-letter-id/$letterId'));
+      print("Fetching letter chunks");
+      print(response.statusCode);
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        return data.map((e) => LetterChunk.fromMap(e)).toList();
+      } else {
+        throw Exception('Failed to load letter chunks');
+      }
+    } catch (e) {
+      print('Error fetching letter chunks: $e');
+      return [];
+    }
+  }
+
+  // New method to fetch chunk hypotheses
+  Future<List<ChunkHypothesis>> fetchChunkHypotheses(int letterChunkId) async {
+    try {
+      final response = await http.get(Uri.parse('$_baseUrl/get-chunk-hypotheses-by-chunk-id/$letterChunkId'));
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        return data.map((e) => ChunkHypothesis.fromMap(e)).toList();
+      } else {
+        throw Exception('Failed to load chunk hypotheses');
+      }
+    } catch (e) {
+      print('Error fetching chunk hypotheses: $e');
       return [];
     }
   }

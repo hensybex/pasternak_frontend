@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'models/letter.dart';
+import 'screens/letter/letter_screen_provider.dart';
 import 'screens/list_letters/list_letters_provider.dart';
 import 'tools/router.dart';
 
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ListLettersProvider()),
+        ChangeNotifierProvider(create: (context) => LetterScreenProvider()),
+        
       ],
       child: MaterialApp.router(
         title: 'Research App',

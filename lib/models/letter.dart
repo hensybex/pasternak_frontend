@@ -5,7 +5,7 @@ part 'letter.g.dart';
 @HiveType(typeId: 0)
 class Letter extends HiveObject {
   @HiveField(0)
-  final String id;
+  final int id;
   @HiveField(1)
   final String originalName;
   @HiveField(2)
@@ -26,6 +26,8 @@ class Letter extends HiveObject {
   final String letterNotes;
   @HiveField(10)
   final String brief;
+  @HiveField(11)
+  final DateTime createdAt;
 
   Letter({
     required this.id,
@@ -39,11 +41,12 @@ class Letter extends HiveObject {
     this.fullLetter = '',
     this.letterNotes = '',
     this.brief = '',
+    required this.createdAt,
   });
 
   factory Letter.fromMap(Map<String, dynamic> map) {
     return Letter(
-      id: map['id'] ?? '',
+      id: map['id'] ?? 0,
       originalName: map['original_name'] ?? '',
       name: map['name'] ?? '',
       dateWithLocation: map['date_with_location'] ?? '',
@@ -54,6 +57,7 @@ class Letter extends HiveObject {
       fullLetter: map['full_letter'] ?? '',
       letterNotes: map['letter_notes'] ?? '',
       brief: map['brief'] ?? '',
+      createdAt: map['created_at'] != null ? DateTime.parse(map['created_at']) : DateTime.now(),
     );
   }
 
@@ -70,6 +74,7 @@ class Letter extends HiveObject {
       'full_letter': fullLetter,
       'letter_notes': letterNotes,
       'brief': brief,
+      'created_at': createdAt.toIso8601String(),
     };
   }
 }

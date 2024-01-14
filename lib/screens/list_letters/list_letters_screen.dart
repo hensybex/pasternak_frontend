@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pasternak_frontend/models/letter.dart';
 import 'package:provider/provider.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 import '../../services/letters_service.dart';
@@ -7,8 +9,10 @@ import 'init.dart';
 import 'list_letters_provider.dart';
 
 class ListLettersScreen extends StatefulWidget {
+  const ListLettersScreen({super.key});
+
   @override
-  _ListLettersScreenState createState() => _ListLettersScreenState();
+  State<ListLettersScreen> createState() => _ListLettersScreenState();
 }
 
 class _ListLettersScreenState extends State<ListLettersScreen> {
@@ -22,9 +26,7 @@ class _ListLettersScreenState extends State<ListLettersScreen> {
     _scrollController.addListener(() {
       if (_scrollController.position.atEdge) {
         if (_scrollController.position.pixels == 0) {
-          // User is at the top of the list.
         } else {
-          // User has reached the end of the list.
           _fetchMoreLetters();
         }
       }
@@ -35,7 +37,6 @@ class _ListLettersScreenState extends State<ListLettersScreen> {
     int pageSize = 20;
     final listLettersProvider = Provider.of<ListLettersProvider>(context, listen: false);
     if (listLettersProvider.isLoading) {
-      // Avoid making multiple simultaneous requests.
       return;
     }
 
@@ -62,14 +63,14 @@ class _ListLettersScreenState extends State<ListLettersScreen> {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Align(
+              return const Align(
                 alignment: Alignment.center,
                 child: CircularProgressIndicator(),
               );
             }
             return Consumer<ListLettersProvider>(builder: (context, listLettersProvider, child) {
               return WebSmoothScroll(
-                controller: _scrollController, // Use the same scroll controller
+                controller: _scrollController,
                 scrollOffset: 100,
                 animationDuration: 1,
                 curve: Curves.easeInOutCirc,
@@ -78,16 +79,25 @@ class _ListLettersScreenState extends State<ListLettersScreen> {
                   controller: _scrollController,
                   child: Column(
                     children: List.generate(listLettersProvider.filteredLetters.length, (index) {
+                      Letter letter = listLettersProvider.filteredLetters[index];
                       if (index == listLettersProvider.filteredLetters.length - 1) {
                         // Reached the last item, show loading indicator.
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                       return Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 16, right: 16, bottom: 16, left: 10),
-                          child: LetterListCard(
-                            letter: listLettersProvider.filteredLetters[index],
+                          padding: const EdgeInsets.only(top: 16, right: 16, bottom: 16, left: 10),
+                          child:  MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                            onTap: () {
+                              context.go('/letter/${letter.id}', extra: letter);
+                            },
+                              child: LetterListCard(
+                                letter: letter,
+                              ),
+                            ),
                           ),
                         ),
                       );
@@ -106,38 +116,3 @@ class _ListLettersScreenState extends State<ListLettersScreen> {
     super.dispose();
   }
 }
-
-
-/* // Replace with your method to fetch letters
-Future<List<Letter>> fetchLetters(int pageKey, int pageSize) async {
-  var box = await Hive.openBox<Letter>('letters');
-
-  // Check if letters are cached
-  if (box.isNotEmpty) {
-    return box.values.toList();
-  }
-
-  final LettersService lettersService = LettersService();
-  List<Letter> letters = await lettersService.fetchLetters(pageKey, pageSize);
-
-  for (var letter in letters) {
-    box.put(letter.id, letter);
-  }
-
-  return letters;
-} */
-/* Future<void> _fetchPage(int pageKey) async {
-    try {
-      // Replace with your method to fetch letters
-      final newLetters = await fetchLetters(pageKey, _pageSize);
-      final isLastPage = newLetters.length < _pageSize;
-      if (isLastPage) {
-        _pagingController.appendLastPage(newLetters);
-      } else {
-        final nextPageKey = pageKey + newLetters.length;
-        _pagingController.appendPage(newLetters, nextPageKey);
-      }
-    } catch (error) {
-      _pagingController.error = error;
-    }
-  } */
