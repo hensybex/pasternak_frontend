@@ -20,6 +20,8 @@ class LetterComposite extends HiveObject {
   final List<int> categoriesIds;
   @HiveField(6)
   final Map<int, int> hypothesesCounts;
+  @HiveField(7)
+  final String year;
 
   LetterComposite({
     required this.id,
@@ -29,6 +31,7 @@ class LetterComposite extends HiveObject {
     required this.brief,
     required this.categoriesIds,
     required this.hypothesesCounts,
+    required this.year,
   });
 
   factory LetterComposite.fromJson(Map<String, dynamic> map) {
@@ -40,6 +43,7 @@ class LetterComposite extends HiveObject {
       brief: map['brief'] ?? '',
       categoriesIds: map['categories_ids'] ?? [],
       hypothesesCounts: map['hypotheses_counts'] ?? [],
+      year: map['year'] ?? '',
     );
   }
 
@@ -51,12 +55,10 @@ class LetterComposite extends HiveObject {
     if (hypothesesCountsRaw != null) {
       if (hypothesesCountsRaw is String) {
         // If the JSONB comes as a string, parse it
-        hypothesesCounts = (json.decode(hypothesesCountsRaw) as Map)
-            .map((key, value) => MapEntry(int.parse(key), value));
+        hypothesesCounts = (json.decode(hypothesesCountsRaw) as Map).map((key, value) => MapEntry(int.parse(key), value));
       } else if (hypothesesCountsRaw is Map) {
         // If it's already a Map, cast the keys to int
-        hypothesesCounts = hypothesesCountsRaw
-            .map((key, value) => MapEntry(int.parse(key), value));
+        hypothesesCounts = hypothesesCountsRaw.map((key, value) => MapEntry(int.parse(key), value));
       }
     }
 
@@ -68,6 +70,7 @@ class LetterComposite extends HiveObject {
       brief: map['brief'] ?? '',
       categoriesIds: (map['categoriesIds'] as List<dynamic>).cast<int>(),
       hypothesesCounts: hypothesesCounts,
+      year: map['year'] ?? '',
     );
   }
 
@@ -80,6 +83,7 @@ class LetterComposite extends HiveObject {
       'brief': brief,
       'categories_ids': categoriesIds,
       'hypotheses_counts': hypothesesCounts,
+      'year': year,
     };
   }
 }

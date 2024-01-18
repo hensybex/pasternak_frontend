@@ -24,13 +24,14 @@ class LetterCompositeAdapter extends TypeAdapter<LetterComposite> {
       brief: fields[4] as String,
       categoriesIds: (fields[5] as List).cast<int>(),
       hypothesesCounts: (fields[6] as Map).cast<int, int>(),
+      year: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, LetterComposite obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class LetterCompositeAdapter extends TypeAdapter<LetterComposite> {
       ..writeByte(5)
       ..write(obj.categoriesIds)
       ..writeByte(6)
-      ..write(obj.hypothesesCounts);
+      ..write(obj.hypothesesCounts)
+      ..writeByte(7)
+      ..write(obj.year);
   }
 
   @override

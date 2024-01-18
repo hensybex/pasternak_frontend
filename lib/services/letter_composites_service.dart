@@ -8,16 +8,13 @@ class LetterCompositeService {
   static const String _baseUrl = 'http://localhost:8080';
 
   // Fetch LetterComposites from the server
-  Future<List<LetterComposite>> fetchLetterComposites(
-      int pageIndex, int pageSize) async {
+  Future<List<LetterComposite>> fetchLetterComposites(int pageIndex, int pageSize) async {
     try {
-      final response = await http.get(Uri.parse(
-          '$_baseUrl/get-letter-composites-paginated?pageIndex=$pageIndex&pageSize=$pageSize'));
+      final response = await http.get(Uri.parse('$_baseUrl/get-letter-composites-paginated?pageIndex=$pageIndex&pageSize=$pageSize'));
 
       if (response.statusCode == 200) {
         List<dynamic> body = jsonDecode(response.body);
-        List<LetterComposite> composites =
-            body.map((dynamic item) => LetterComposite.fromMap(item)).toList();
+        List<LetterComposite> composites = body.map((dynamic item) => LetterComposite.fromMap(item)).toList();
         return composites;
       } else {
         throw Exception('Failed to load LetterComposites');
@@ -29,9 +26,9 @@ class LetterCompositeService {
   }
 
   // Optional: Store LetterComposites in Hive
-  Future<void> storeLetterCompositesInHive(
-      List<LetterComposite> composites) async {
+  Future<void> storeLetterCompositesInHive(List<LetterComposite> composites) async {
     final box = await Hive.openBox<LetterComposite>('letterComposites');
+    await box.clear();
     await box.addAll(composites);
   }
 

@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 import '../models/hypothesis_info.dart';
 import '../models/letter_chunk.dart';
 import '../models/chunk_hypothesis.dart';
-import '../utils/styling_utils.dart';
+import '../screens/letter/letter_screen_provider.dart';
 
 class CustomTextWidget extends StatelessWidget {
   final List<LetterChunk> letterChunks;
@@ -19,18 +19,18 @@ class CustomTextWidget extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: _buildTextSpans(context),
+        style: const TextStyle(
+          fontFamily: 'PT Serif',
+          fontSize: 18,
+        ),
       ),
     );
   }
 
   List<InlineSpan> _buildTextSpans(BuildContext context) {
     List<InlineSpan> spans = [];
-    checkHypothesisInfo(1);
-    getHypothesisName(1);
 
-    // Open the Hive box
-    Box<HypothesisInfo> hypothesesInfoBox =
-        Hive.box<HypothesisInfo>('hypothesesInfo');
+    final LetterScreenProvider letterScreenProvider = Provider.of<LetterScreenProvider>(context, listen: false);
 
     for (int i = 0; i < letterChunks.length; i++) {
       final chunk = letterChunks[i];
@@ -45,24 +45,25 @@ class CustomTextWidget extends StatelessWidget {
         // Fetch hypothesis name from Hive box
         String consolidatedNames = getHypothesisName(hypothesis.hypothesisId);
         int end = hypothesis.quoteEnd;
+        bool isAnyHypothesisSelected = letterScreenProvider.selectedHypotheses.contains(hypothesis.hypothesisId);
 
-        while (
-            j + 1 < hypotheses.length && hypotheses[j + 1].quoteStart <= end) {
+        while (j + 1 < hypotheses.length && hypotheses[j + 1].quoteStart <= end) {
           end = max(end, hypotheses[j + 1].quoteEnd);
 
           // Fetch the next hypothesis name
-          String nextHypothesisName =
-              getHypothesisName(hypotheses[j + 1].hypothesisId);
+          String nextHypothesisName = getHypothesisName(hypotheses[j + 1].hypothesisId);
           consolidatedNames += ', $nextHypothesisName';
+
+          if (letterScreenProvider.selectedHypotheses.contains(hypotheses[j + 1].hypothesisId)) {
+            isAnyHypothesisSelected = true;
+          }
 
           j++;
         }
 
         // Text before the hypothesis
         if (currentIndex < hypothesis.quoteStart) {
-          spans.add(TextSpan(
-              text:
-                  chunk.chunk.substring(currentIndex, hypothesis.quoteStart)));
+          spans.add(TextSpan(text: chunk.chunk.substring(currentIndex, hypothesis.quoteStart)));
         }
 
         // Hypothesis text
@@ -72,8 +73,15 @@ class CustomTextWidget extends StatelessWidget {
             onTap: () => _showHypothesisPopup(context, consolidatedNames),
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: Text(hypothesisText,
-                  style: TextStyle(backgroundColor: Colors.grey)),
+              child: Consumer<LetterScreenProvider>(builder: (context, letterScreenProvider, child) {
+                return Text(
+                  hypothesisText,
+                  style: TextStyle(
+                    backgroundColor: isAnyHypothesisSelected ? Colors.blue : Colors.grey,
+                    fontFamily: 'PT Serif',
+                  ),
+                );
+              }),
             ),
           ),
         ));
@@ -102,9 +110,12 @@ class CustomTextWidget extends StatelessWidget {
   }
 
   String getHypothesisName(int hypothesisId) {
-    var hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfo');
+    Box<HypothesisInfo> hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfo');
 
-    var hypothesisInfo = hypothesesInfoBox.get(hypothesisId);
+    //var hypothesisInfo = hypothesesInfoBox.values.firstWhere(hypothesisId);
+    HypothesisInfo? hypothesisInfo = hypothesesInfoBox.values.firstWhere(
+      (h) => h.id == hypothesisId,
+    );
     if (hypothesisInfo != null) {
       return hypothesisInfo.name;
     } else {

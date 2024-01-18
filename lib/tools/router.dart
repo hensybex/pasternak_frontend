@@ -6,16 +6,18 @@ final routes = [
   GoRoute(
     path: '/',
     builder: (context, state) => ListLettersScreen(),
-  ),
-  GoRoute(
-    path: '/letter/:letter_id',
-    builder: (context, state) {
-      // Assuming 'Letter' is your data model class
-      int letterId = int.parse(state.pathParameters['letter_id']!);
-      return LetterScreen(
-        letterId: letterId,
-      );
-    },
+    routes: [
+      // Nested routes
+      GoRoute(
+        path: 'letter/:letter_id', // Note the relative path
+        builder: (context, state) {
+          int letterId = int.parse(state.pathParameters['letter_id']!);
+          return LetterScreen(
+            letterId: letterId,
+          );
+        },
+      ),
+    ],
   ),
   // Additional routes will be added here
 ];

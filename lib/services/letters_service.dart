@@ -11,9 +11,7 @@ class LettersService {
 
   Future<List<Letter>> fetchLetters(int pageKey, int pageSize) async {
     try {
-      final response = await http.get(
-          Uri.parse('$_baseUrl/get-letters-paginated')
-              .replace(queryParameters: {
+      final response = await http.get(Uri.parse('$_baseUrl/get-letters-paginated').replace(queryParameters: {
         'pageIndex': pageKey.toString(),
         'pageSize': pageSize.toString(),
       }));
@@ -41,9 +39,13 @@ class LettersService {
         var data = json.decode(response.body);
         return Letter.fromMap(data);
       } else if (response.statusCode == 404) {
+        print("IM HERE!");
+        print(response.body);
         // Handle no more letters
         return Letter(id: 0, createdAt: DateTime.now());
       } else {
+        print("IM HERE2!");
+        print(response.body);
         throw Exception('Failed to load letter');
       }
     } catch (e) {
@@ -54,8 +56,7 @@ class LettersService {
 
   Future<List<Hypothesis>> fetchHypotheses() async {
     try {
-      final response =
-          await http.get(Uri.parse('$_baseUrl/get-all-hypotheses'));
+      final response = await http.get(Uri.parse('$_baseUrl/get-all-hypotheses'));
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         return data.map((e) => Hypothesis.fromMap(e)).toList();
@@ -71,8 +72,7 @@ class LettersService {
 
   Future<List<Category>> fetchCategories() async {
     try {
-      final response =
-          await http.get(Uri.parse('$_baseUrl/get-all-categories'));
+      final response = await http.get(Uri.parse('$_baseUrl/get-all-categories'));
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         return data.map((e) => Category.fromMap(e)).toList();
@@ -89,8 +89,7 @@ class LettersService {
   // New method to fetch letter chunks
   Future<List<LetterChunk>> fetchLetterChunks(int letterId) async {
     try {
-      final response = await http
-          .get(Uri.parse('$_baseUrl/get-letter-chunks-by-letter-id/$letterId'));
+      final response = await http.get(Uri.parse('$_baseUrl/get-letter-chunks-by-letter-id/$letterId'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
@@ -107,9 +106,8 @@ class LettersService {
   // New method to fetch chunk hypotheses
   Future<List<ChunkHypothesis>> fetchChunkHypotheses(int letterChunkId) async {
     try {
-      final response = await http.get(Uri.parse(
-          '$_baseUrl/get-chunk-hypotheses-by-chunk-id/$letterChunkId'));
-
+      final response = await http.get(Uri.parse('$_baseUrl/get-chunk-hypotheses-by-chunk-id/$letterChunkId'));
+      print(response.body);
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         return data.map((e) => ChunkHypothesis.fromMap(e)).toList();
@@ -117,7 +115,7 @@ class LettersService {
         throw Exception('Failed to load chunk hypotheses');
       }
     } catch (e) {
-      print('Error fetching chunk hypotheses: $e');
+      //print('Error fetching chunk hypotheses: $e');
       return [];
     }
   }
