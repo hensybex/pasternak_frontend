@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/letter.dart';
+import 'package:pasternak_frontend/models/letter_composite.dart';
 
 class LetterListCard extends StatelessWidget {
-  final Letter letter;
+  final LetterComposite letterComposite;
 
-  LetterListCard({required this.letter});
+  const LetterListCard({super.key, required this.letterComposite});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class LetterListCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                letter.sentTo,
+                letterComposite.sentTo,
                 style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class LetterListCard extends StatelessWidget {
                 children: [
                   const Icon(Icons.date_range, size: 16.0),
                   const SizedBox(width: 4.0),
-                  Text(letter.sentAt),
+                  Text(letterComposite.sentAt),
                 ],
               ),
               const SizedBox(height: 8.0),
@@ -37,12 +37,12 @@ class LetterListCard extends StatelessWidget {
                 children: [
                   const Icon(Icons.location_on, size: 16.0),
                   const SizedBox(width: 4.0),
-                  Text(letter.location),
+                  Text(letterComposite.location),
                 ],
               ),
               const SizedBox(height: 8.0),
               Text(
-                letter.brief,
+                letterComposite.brief,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 14.0),

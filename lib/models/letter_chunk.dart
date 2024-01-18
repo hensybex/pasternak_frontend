@@ -1,15 +1,16 @@
 class LetterChunk {
-  int? id;
+  final int id;
   final int letterId;
   final int chunkOrder;
   final String chunk;
   final int numSymbols;
   final DateTime createdAt;
 
-  LetterChunk({required this.letterId, required this.chunkOrder, required this.chunk, required this.numSymbols, required this.createdAt,});
+  LetterChunk({required this.id, required this.letterId, required this.chunkOrder, required this.chunk, required this.numSymbols, required this.createdAt,});
 
   factory LetterChunk.fromMap(Map<String, dynamic> map) {
     return LetterChunk(
+      id: map['id'] ?? 0,
       letterId: map['letter_id'] ?? 0,
       chunkOrder: map['chunk_order'] ?? 0,
       chunk: map['chunk'] ?? '',

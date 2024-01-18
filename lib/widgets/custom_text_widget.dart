@@ -1,91 +1,126 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../models/hypothesis_info.dart';
 import '../models/letter_chunk.dart';
 import '../models/chunk_hypothesis.dart';
 import '../utils/styling_utils.dart';
 
-class CustomTextWidget extends StatefulWidget {
+class CustomTextWidget extends StatelessWidget {
   final List<LetterChunk> letterChunks;
-  final List<ChunkHypothesis> chunkHypotheses;
+  final List<List<ChunkHypothesis>> chunkHypotheses;
 
   CustomTextWidget({required this.letterChunks, required this.chunkHypotheses});
 
   @override
-  _CustomTextWidgetState createState() => _CustomTextWidgetState();
-}
-
-class _CustomTextWidgetState extends State<CustomTextWidget> {
-  @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        children: _buildTextSpans(),
+        children: _buildTextSpans(context),
       ),
     );
   }
 
-  List<TextSpan> _buildTextSpans() {
-    List<TextSpan> spans = [];
-    for (var chunk in widget.letterChunks) {
-      spans.add(_buildChunkSpan(chunk));
+  List<InlineSpan> _buildTextSpans(BuildContext context) {
+    List<InlineSpan> spans = [];
+    checkHypothesisInfo(1);
+    getHypothesisName(1);
+
+    // Open the Hive box
+    Box<HypothesisInfo> hypothesesInfoBox =
+        Hive.box<HypothesisInfo>('hypothesesInfo');
+
+    for (int i = 0; i < letterChunks.length; i++) {
+      final chunk = letterChunks[i];
+      final hypotheses = chunkHypotheses[i];
+
+      int currentIndex = 0;
+      hypotheses.sort((a, b) => a.quoteStart.compareTo(b.quoteStart));
+
+      for (int j = 0; j < hypotheses.length; j++) {
+        var hypothesis = hypotheses[j];
+
+        // Fetch hypothesis name from Hive box
+        String consolidatedNames = getHypothesisName(hypothesis.hypothesisId);
+        int end = hypothesis.quoteEnd;
+
+        while (
+            j + 1 < hypotheses.length && hypotheses[j + 1].quoteStart <= end) {
+          end = max(end, hypotheses[j + 1].quoteEnd);
+
+          // Fetch the next hypothesis name
+          String nextHypothesisName =
+              getHypothesisName(hypotheses[j + 1].hypothesisId);
+          consolidatedNames += ', $nextHypothesisName';
+
+          j++;
+        }
+
+        // Text before the hypothesis
+        if (currentIndex < hypothesis.quoteStart) {
+          spans.add(TextSpan(
+              text:
+                  chunk.chunk.substring(currentIndex, hypothesis.quoteStart)));
+        }
+
+        // Hypothesis text
+        var hypothesisText = chunk.chunk.substring(hypothesis.quoteStart, end);
+        spans.add(WidgetSpan(
+          child: GestureDetector(
+            onTap: () => _showHypothesisPopup(context, consolidatedNames),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Text(hypothesisText,
+                  style: TextStyle(backgroundColor: Colors.grey)),
+            ),
+          ),
+        ));
+
+        currentIndex = end;
+      }
+
+      // Remaining text after the last hypothesis
+      if (currentIndex < chunk.chunk.length) {
+        spans.add(TextSpan(text: chunk.chunk.substring(currentIndex)));
+      }
     }
+
     return spans;
   }
 
-  TextSpan _buildChunkSpan(LetterChunk chunk) {
-    List<InlineSpan> inlineSpans = [];
+  void checkHypothesisInfo(int hypothesisId) async {
+    var hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfoBox');
 
-    // Assuming that chunkHypotheses are sorted by their position in the text
-    int lastSplitIndex = 0;
-    widget.chunkHypotheses
-        .where((h) => h.letterChunkId == chunk.id)
-        .forEach((hypothesis) {
-      // Split the chunk text based on the hypothesis position
-      String beforeHypothesis =
-          chunk.chunk.substring(lastSplitIndex, hypothesis.quoteStart);
-      String hypothesisText =
-          chunk.chunk.substring(hypothesis.quoteStart, hypothesis.quoteEnd);
-
-      // Add non-hypothesis part
-      inlineSpans.add(TextSpan(text: beforeHypothesis));
-
-      // Add hypothesis part with styling and recognizer for hover
-      inlineSpans.add(TextSpan(
-        text: hypothesisText,
-        style: StylingUtils.getStyleForHypothesis(
-            hypothesis), // Method in StylingUtils to get styling based on hypothesis
-        recognizer: TapGestureRecognizer()..onTap = () => _onHover(hypothesis),
-      ));
-
-      lastSplitIndex = hypothesis.quoteEnd;
-    });
-
-    // Add remaining part of the chunk (if any)
-    if (lastSplitIndex < chunk.chunk.length) {
-      inlineSpans.add(TextSpan(text: chunk.chunk.substring(lastSplitIndex)));
+    for (HypothesisInfo hypothesisInfo in hypothesesInfoBox.values) {
+      if (hypothesisInfo.id == hypothesisId) {
+        print('TRUE ${hypothesisInfo.name}');
+        break; // Exit the loop once the matching ID is found
+      }
     }
-
-    return TextSpan(children: inlineSpans);
   }
 
-  void _onHover(ChunkHypothesis hypothesis) {
-    // Display a popup with details of the hypothesis
-    // For example, using a Flutter package like 'flutter_tooltip'
-    /* Tooltip.show(
-      context,
-      text:
-          'Hypothesis: ${hypothesis.hypothesisId}\nVersion: ${hypothesis.version}\nAccepted: ${hypothesis.accepted}',
-      target: GestureDetector(
-        onTap: () => _toggleHypothesisAccepted(hypothesis),
-        child: Text(hypothesis.proof,
-            style: TextStyle(decoration: TextDecoration.underline)),
-      ),
-    ); */
+  String getHypothesisName(int hypothesisId) {
+    var hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfo');
+
+    var hypothesisInfo = hypothesesInfoBox.get(hypothesisId);
+    if (hypothesisInfo != null) {
+      return hypothesisInfo.name;
+    } else {
+      return "Unknown";
+    }
   }
 
-  void _toggleHypothesisAccepted(ChunkHypothesis hypothesis) {
-    setState(() {
-      hypothesis.accepted = !hypothesis.accepted;
-    });
+  void _showHypothesisPopup(BuildContext context, String hypothesisName) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(hypothesisName),
+          // Other dialog properties
+        );
+      },
+    );
   }
 }
