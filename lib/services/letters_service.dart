@@ -7,7 +7,7 @@ import '../models/letter.dart';
 import '../models/letter_chunk.dart'; // Import the Letter model
 
 class LettersService {
-  static const String _baseUrl = 'http://localhost:8080';
+  static const String _baseUrl = 'https://pasternak-gpt.duckdns.org/api';
 
   Future<List<Letter>> fetchLetters(int pageKey, int pageSize) async {
     try {
