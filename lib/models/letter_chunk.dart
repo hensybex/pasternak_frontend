@@ -1,12 +1,32 @@
-class LetterChunk {
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'hive_type_ids.dart';
+
+part 'letter_chunk.g.dart';
+
+@HiveType(typeId: HiveTypeIds.letterChunk)
+class LetterChunk extends HiveObject {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final int letterId;
+  @HiveField(2)
   final int chunkOrder;
+  @HiveField(3)
   final String chunk;
+  @HiveField(4)
   final int numSymbols;
+  @HiveField(5)
   final DateTime createdAt;
 
-  LetterChunk({required this.id, required this.letterId, required this.chunkOrder, required this.chunk, required this.numSymbols, required this.createdAt,});
+  LetterChunk({
+    required this.id,
+    required this.letterId,
+    required this.chunkOrder,
+    required this.chunk,
+    required this.numSymbols,
+    required this.createdAt,
+  });
 
   factory LetterChunk.fromMap(Map<String, dynamic> map) {
     return LetterChunk(
@@ -18,7 +38,6 @@ class LetterChunk {
       createdAt: map['created_at'] != null ? DateTime.parse(map['created_at']) : DateTime.now(),
     );
   }
-
 
   Map<String, dynamic> toMap() {
     return {

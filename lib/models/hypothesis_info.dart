@@ -1,8 +1,10 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'hive_type_ids.dart';
+
 part 'hypothesis_info.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: HiveTypeIds.hypothesisInfo)
 class HypothesisInfo extends HiveObject {
   @HiveField(0)
   final int id;
@@ -11,6 +13,12 @@ class HypothesisInfo extends HiveObject {
   @HiveField(2)
   int numOfAppearances;
 
-  HypothesisInfo(
-      {required this.id, required this.name, this.numOfAppearances = 0});
+  HypothesisInfo({required this.id, required this.name, this.numOfAppearances = 0});
+
+  factory HypothesisInfo.fromJson(Map<String, dynamic> map) {
+    return HypothesisInfo(
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+    );
+  }
 }

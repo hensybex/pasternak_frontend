@@ -8,7 +8,7 @@ part of 'hypothesis_info.dart';
 
 class HypothesisInfoAdapter extends TypeAdapter<HypothesisInfo> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
   HypothesisInfo read(BinaryReader reader) {

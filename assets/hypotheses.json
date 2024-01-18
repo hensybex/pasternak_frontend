@@ -1,0 +1,989 @@
+[
+	{
+		"id": 3,
+		"name": "П не посылает главу",
+		"category_id": 1,
+		"json_name": "p_doesnt_send_chapter",
+		"created_at": "2024-01-14T04:27:01.484Z"
+	},
+	{
+		"id": 4,
+		"name": "П закончил перевод",
+		"category_id": 1,
+		"json_name": "p_finished_translation",
+		"created_at": "2024-01-14T04:27:01.834Z"
+	},
+	{
+		"id": 5,
+		"name": "П закончил книгу",
+		"category_id": 1,
+		"json_name": "p_finished_book",
+		"created_at": "2024-01-14T04:27:01.980Z"
+	},
+	{
+		"id": 6,
+		"name": "П закончил главу",
+		"category_id": 1,
+		"json_name": "p_finished_chapter",
+		"created_at": "2024-01-14T04:27:02.123Z"
+	},
+	{
+		"id": 8,
+		"name": "П закончил статью",
+		"category_id": 1,
+		"json_name": "p_finished_article",
+		"created_at": "2024-01-14T04:27:02.508Z"
+	},
+	{
+		"id": 9,
+		"name": "П закончил письмо",
+		"category_id": 1,
+		"json_name": "p_finished_letter",
+		"created_at": "2024-01-14T04:27:02.670Z"
+	},
+	{
+		"id": 10,
+		"name": "П не закончил перевод",
+		"category_id": 1,
+		"json_name": "p_not_finished_translation",
+		"created_at": "2024-01-14T04:27:02.819Z"
+	},
+	{
+		"id": 12,
+		"name": "П не закончил главу",
+		"category_id": 1,
+		"json_name": "p_not_finished_chapter",
+		"created_at": "2024-01-14T04:27:03.122Z"
+	},
+	{
+		"id": 13,
+		"name": "П не закончил стихотворение",
+		"category_id": 1,
+		"json_name": "p_not_finished_poem",
+		"created_at": "2024-01-14T04:27:03.300Z"
+	},
+	{
+		"id": 14,
+		"name": "П не закончил статью",
+		"category_id": 1,
+		"json_name": "p_not_finished_article",
+		"created_at": "2024-01-14T04:27:03.445Z"
+	},
+	{
+		"id": 16,
+		"name": "П сдал в издательство\/журнал\/газету перевод",
+		"category_id": 1,
+		"json_name": "p_submitted_translation",
+		"created_at": "2024-01-14T04:27:03.839Z"
+	},
+	{
+		"id": 17,
+		"name": "П сдал в издательство\/журнал\/газету книгу",
+		"category_id": 1,
+		"json_name": "p_submitted_book",
+		"created_at": "2024-01-14T04:27:03.984Z"
+	},
+	{
+		"id": 19,
+		"name": "П сдал в издательство\/журнал\/газету стихотворение",
+		"category_id": 1,
+		"json_name": "p_submitted_poem",
+		"created_at": "2024-01-14T04:27:04.291Z"
+	},
+	{
+		"id": 20,
+		"name": "П обещает послать перевод",
+		"category_id": 1,
+		"json_name": "p_promises_to_send_translation",
+		"created_at": "2024-01-14T04:27:04.461Z"
+	},
+	{
+		"id": 21,
+		"name": "П обещает послать главу",
+		"category_id": 1,
+		"json_name": "p_promises_to_send_chapter",
+		"created_at": "2024-01-14T04:27:04.616Z"
+	},
+	{
+		"id": 22,
+		"name": "П обещает послать поэму",
+		"category_id": 1,
+		"json_name": "p_promises_to_send_poem",
+		"created_at": "2024-01-14T04:27:04.761Z"
+	},
+	{
+		"id": 24,
+		"name": "П рассказывает о планах написать",
+		"category_id": 1,
+		"json_name": "p_discusses_plans_to_write",
+		"created_at": "2024-01-14T04:27:05.069Z"
+	},
+	{
+		"id": 25,
+		"name": "П рассказывает о планах перевести",
+		"category_id": 1,
+		"json_name": "p_discusses_plans_to_translate",
+		"created_at": "2024-01-14T04:27:05.273Z"
+	},
+	{
+		"id": 26,
+		"name": "П рассказывает о планах сделать",
+		"category_id": 1,
+		"json_name": "p_discusses_plans_to_create",
+		"created_at": "2024-01-14T04:27:05.420Z"
+	},
+	{
+		"id": 28,
+		"name": "П пишет о замечаниях корреспондентов",
+		"category_id": 1,
+		"json_name": "p_writes_about_correspondent_comments",
+		"created_at": "2024-01-14T04:27:05.723Z"
+	},
+	{
+		"id": 29,
+		"name": "П пишет о замечаниях критиков",
+		"category_id": 1,
+		"json_name": "p_writes_about_critics_comments",
+		"created_at": "2024-01-14T04:27:05.867Z"
+	},
+	{
+		"id": 30,
+		"name": "П упоминает издательство",
+		"category_id": 1,
+		"json_name": "p_mentions_publisher",
+		"created_at": "2024-01-14T04:27:06.012Z"
+	},
+	{
+		"id": 31,
+		"name": "П упоминает журнал",
+		"category_id": 1,
+		"json_name": "p_mentions_journal",
+		"created_at": "2024-01-14T04:27:06.169Z"
+	},
+	{
+		"id": 33,
+		"name": "П пишет о необходимости редактуры",
+		"category_id": 1,
+		"json_name": "p_writes_about_need_for_editing",
+		"created_at": "2024-01-14T04:27:06.456Z"
+	},
+	{
+		"id": 34,
+		"name": "П пишет о необходимости корректировки",
+		"category_id": 1,
+		"json_name": "p_writes_about_need_for_correction",
+		"created_at": "2024-01-14T04:27:06.612Z"
+	},
+	{
+		"id": 35,
+		"name": "П пишет о необходимости исправлений",
+		"category_id": 1,
+		"json_name": "p_writes_about_need_for_changes",
+		"created_at": "2024-01-14T04:27:06.769Z"
+	},
+	{
+		"id": 37,
+		"name": "П пишет о необходимости переработки",
+		"category_id": 1,
+		"json_name": "p_writes_about_need_for_revision",
+		"created_at": "2024-01-14T04:27:07.071Z"
+	},
+	{
+		"id": 38,
+		"name": "П обещает написать",
+		"category_id": 1,
+		"json_name": "p_promises_to_write",
+		"created_at": "2024-01-14T04:27:07.218Z"
+	},
+	{
+		"id": 39,
+		"name": "П обещает сдать",
+		"category_id": 1,
+		"json_name": "p_promises_to_submit",
+		"created_at": "2024-01-14T04:27:07.382Z"
+	},
+	{
+		"id": 40,
+		"name": "П обещает перевести",
+		"category_id": 1,
+		"json_name": "p_promises_to_translate",
+		"created_at": "2024-01-14T04:27:07.538Z"
+	},
+	{
+		"id": 41,
+		"name": "П хвалит стихотворение",
+		"category_id": 2,
+		"json_name": "p_praises_poem",
+		"created_at": "2024-01-14T04:27:07.695Z"
+	},
+	{
+		"id": 43,
+		"name": "П хвалит письмо",
+		"category_id": 2,
+		"json_name": "p_praises_letter",
+		"created_at": "2024-01-14T04:27:08.002Z"
+	},
+	{
+		"id": 44,
+		"name": "П хвалит книгу",
+		"category_id": 2,
+		"json_name": "p_praises_book",
+		"created_at": "2024-01-14T04:27:08.151Z"
+	},
+	{
+		"id": 45,
+		"name": "П пересказывает слова",
+		"category_id": 2,
+		"json_name": "p_recounts_words",
+		"created_at": "2024-01-14T04:27:08.303Z"
+	},
+	{
+		"id": 47,
+		"name": "П пересказывает рецензию",
+		"category_id": 2,
+		"json_name": "p_recounts_review",
+		"created_at": "2024-01-14T04:27:08.591Z"
+	},
+	{
+		"id": 48,
+		"name": "П пересказывает разговор",
+		"category_id": 2,
+		"json_name": "p_recounts_conversation",
+		"created_at": "2024-01-14T04:27:08.756Z"
+	},
+	{
+		"id": 49,
+		"name": "П пересказывает статью",
+		"category_id": 2,
+		"json_name": "p_recounts_article",
+		"created_at": "2024-01-14T04:27:08.917Z"
+	},
+	{
+		"id": 50,
+		"name": "П пересказывает отзыв",
+		"category_id": 2,
+		"json_name": "p_recounts_feedback",
+		"created_at": "2024-01-14T04:27:09.062Z"
+	},
+	{
+		"id": 52,
+		"name": "П пересказывает книгу",
+		"category_id": 2,
+		"json_name": "p_recounts_book",
+		"created_at": "2024-01-14T04:27:09.369Z"
+	},
+	{
+		"id": 53,
+		"name": "П пересказывает лекцию",
+		"category_id": 2,
+		"json_name": "p_recounts_lecture",
+		"created_at": "2024-01-14T04:27:09.574Z"
+	},
+	{
+		"id": 54,
+		"name": "П описывает пейзаж",
+		"category_id": 2,
+		"json_name": "p_describes_landscape",
+		"created_at": "2024-01-14T04:27:09.717Z"
+	},
+	{
+		"id": 55,
+		"name": "П описывает место",
+		"category_id": 2,
+		"json_name": "p_describes_place",
+		"created_at": "2024-01-14T04:27:09.887Z"
+	},
+	{
+		"id": 57,
+		"name": "П описывает встречу",
+		"category_id": 2,
+		"json_name": "p_describes_meeting",
+		"created_at": "2024-01-14T04:27:10.204Z"
+	},
+	{
+		"id": 58,
+		"name": "П описывает собрание",
+		"category_id": 2,
+		"json_name": "p_describes_gathering",
+		"created_at": "2024-01-14T04:27:10.351Z"
+	},
+	{
+		"id": 60,
+		"name": "П описывает разговор",
+		"category_id": 2,
+		"json_name": "p_describes_conversation",
+		"created_at": "2024-01-14T04:27:10.651Z"
+	},
+	{
+		"id": 61,
+		"name": "П описывает разговор по телефону",
+		"category_id": 2,
+		"json_name": "p_describes_phone_conversation",
+		"created_at": "2024-01-14T04:27:10.794Z"
+	},
+	{
+		"id": 62,
+		"name": "П размышляет об искусстве",
+		"category_id": 2,
+		"json_name": "p_muses_about_art",
+		"created_at": "2024-01-14T04:27:10.965Z"
+	},
+	{
+		"id": 64,
+		"name": "П размышляет о себе и своей биографии",
+		"category_id": 2,
+		"json_name": "p_muses_about_self_and_biography",
+		"created_at": "2024-01-14T04:27:11.315Z"
+	},
+	{
+		"id": 65,
+		"name": "П размышляет о конкретном писателе",
+		"category_id": 2,
+		"json_name": "p_muses_about_specific_writer",
+		"created_at": "2024-01-14T04:27:11.477Z"
+	},
+	{
+		"id": 66,
+		"name": "П просит оценить",
+		"category_id": 2,
+		"json_name": "p_requests_evaluation",
+		"created_at": "2024-01-14T04:27:11.653Z"
+	},
+	{
+		"id": 68,
+		"name": "П характеризует\/оценивает свое творчество",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_own_work",
+		"created_at": "2024-01-14T04:27:11.943Z"
+	},
+	{
+		"id": 69,
+		"name": "П характеризует\/оценивает стиль",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_style",
+		"created_at": "2024-01-14T04:27:12.101Z"
+	},
+	{
+		"id": 70,
+		"name": "П характеризует\/оценивает язык",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_language",
+		"created_at": "2024-01-14T04:27:12.244Z"
+	},
+	{
+		"id": 72,
+		"name": "П характеризует\/оценивает атмосферу",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_atmosphere",
+		"created_at": "2024-01-14T04:27:12.543Z"
+	},
+	{
+		"id": 73,
+		"name": "П нашел картину",
+		"category_id": 2,
+		"json_name": "p_found_painting",
+		"created_at": "2024-01-14T04:27:12.714Z"
+	},
+	{
+		"id": 74,
+		"name": "П характеризует\/оценивает поступок",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_action",
+		"created_at": "2024-01-14T04:27:12.864Z"
+	},
+	{
+		"id": 76,
+		"name": "П упоминает о своем здоровье",
+		"category_id": 3,
+		"json_name": "p_mentions_health",
+		"created_at": "2024-01-14T04:27:13.182Z"
+	},
+	{
+		"id": 77,
+		"name": "П беспокоится о здоровье кого-то",
+		"category_id": 3,
+		"json_name": "p_worries_about_someones_health",
+		"created_at": "2024-01-14T04:27:13.329Z"
+	},
+	{
+		"id": 78,
+		"name": "П жалуется на людей",
+		"category_id": 3,
+		"json_name": "p_complains_about_people",
+		"created_at": "2024-01-14T04:27:13.480Z"
+	},
+	{
+		"id": 80,
+		"name": "П описывает сон",
+		"category_id": 3,
+		"json_name": "p_describes_dream",
+		"created_at": "2024-01-14T04:27:13.782Z"
+	},
+	{
+		"id": 81,
+		"name": "П рассказывает о встрече",
+		"category_id": 4,
+		"json_name": "p_tells_about_meeting",
+		"created_at": "2024-01-14T04:27:13.927Z"
+	},
+	{
+		"id": 82,
+		"name": "П рассказывает о планах поехать",
+		"category_id": 4,
+		"json_name": "p_tells_about_plans_to_travel",
+		"created_at": "2024-01-14T04:27:14.087Z"
+	},
+	{
+		"id": 83,
+		"name": "П упоминает встречу",
+		"category_id": 4,
+		"json_name": "p_mentions_meeting",
+		"created_at": "2024-01-14T04:27:14.230Z"
+	},
+	{
+		"id": 1,
+		"name": "П не посылает перевод",
+		"category_id": 1,
+		"json_name": "p_doesnt_send_translation",
+		"created_at": "2024-01-14T04:27:01.177Z"
+	},
+	{
+		"id": 2,
+		"name": "П не посылает статью",
+		"category_id": 1,
+		"json_name": "p_doesnt_send_article",
+		"created_at": "2024-01-14T04:27:01.326Z"
+	},
+	{
+		"id": 7,
+		"name": "П закончил стихотворение",
+		"category_id": 1,
+		"json_name": "p_finished_poem",
+		"created_at": "2024-01-14T04:27:02.324Z"
+	},
+	{
+		"id": 11,
+		"name": "П не закончил книгу",
+		"category_id": 1,
+		"json_name": "p_not_finished_book",
+		"created_at": "2024-01-14T04:27:02.963Z"
+	},
+	{
+		"id": 15,
+		"name": "П не закончил письмо",
+		"category_id": 1,
+		"json_name": "p_not_finished_letter",
+		"created_at": "2024-01-14T04:27:03.661Z"
+	},
+	{
+		"id": 18,
+		"name": "П сдал в издательство\/журнал\/газету статью",
+		"category_id": 1,
+		"json_name": "p_submitted_article",
+		"created_at": "2024-01-14T04:27:04.144Z"
+	},
+	{
+		"id": 23,
+		"name": "П рассказывает о творческих планах",
+		"category_id": 1,
+		"json_name": "p_discusses_creative_plans",
+		"created_at": "2024-01-14T04:27:04.926Z"
+	},
+	{
+		"id": 27,
+		"name": "П пишет о замечаниях редакторов",
+		"category_id": 1,
+		"json_name": "p_writes_about_editorial_comments",
+		"created_at": "2024-01-14T04:27:05.581Z"
+	},
+	{
+		"id": 32,
+		"name": "П упоминает время написания произведения",
+		"category_id": 1,
+		"json_name": "p_mentions_writing_time",
+		"created_at": "2024-01-14T04:27:06.313Z"
+	},
+	{
+		"id": 36,
+		"name": "П пишет о необходимости сокращений",
+		"category_id": 1,
+		"json_name": "p_writes_about_need_for_shortening",
+		"created_at": "2024-01-14T04:27:06.918Z"
+	},
+	{
+		"id": 42,
+		"name": "П хвалит человека",
+		"category_id": 2,
+		"json_name": "p_praises_person",
+		"created_at": "2024-01-14T04:27:07.840Z"
+	},
+	{
+		"id": 46,
+		"name": "П пересказывает речь",
+		"category_id": 2,
+		"json_name": "p_recounts_speech",
+		"created_at": "2024-01-14T04:27:08.448Z"
+	},
+	{
+		"id": 51,
+		"name": "П пересказывает оценку",
+		"category_id": 2,
+		"json_name": "p_recounts_evaluation",
+		"created_at": "2024-01-14T04:27:09.225Z"
+	},
+	{
+		"id": 56,
+		"name": "П описывает картину",
+		"category_id": 2,
+		"json_name": "p_describes_painting",
+		"created_at": "2024-01-14T04:27:10.045Z"
+	},
+	{
+		"id": 59,
+		"name": "П описывает свое\/чужое выступление",
+		"category_id": 2,
+		"json_name": "p_describes_own_or_others_performance",
+		"created_at": "2024-01-14T04:27:10.503Z"
+	},
+	{
+		"id": 63,
+		"name": "П размышляет о поэте и поэзии",
+		"category_id": 2,
+		"json_name": "p_muses_about_poet_and_poetry",
+		"created_at": "2024-01-14T04:27:11.111Z"
+	},
+	{
+		"id": 67,
+		"name": "П характеризует\/оценивает стихотворение",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_poem",
+		"created_at": "2024-01-14T04:27:11.801Z"
+	},
+	{
+		"id": 71,
+		"name": "П характеризует\/оценивает манеру",
+		"category_id": 2,
+		"json_name": "p_characterizes_evaluates_manner",
+		"created_at": "2024-01-14T04:27:12.399Z"
+	},
+	{
+		"id": 75,
+		"name": "П упоминает эпизод из прошлого",
+		"category_id": 2,
+		"json_name": "p_mentions_past_episode",
+		"created_at": "2024-01-14T04:27:13.037Z"
+	},
+	{
+		"id": 79,
+		"name": "П жалуется на коллег по цеху",
+		"category_id": 3,
+		"json_name": "p_complains_about_colleagues",
+		"created_at": "2024-01-14T04:27:13.636Z"
+	},
+	{
+		"id": 84,
+		"name": "П обещает выступить",
+		"category_id": 4,
+		"json_name": "p_promises_to_present",
+		"created_at": "2024-01-14T04:27:14.390Z"
+	},
+	{
+		"id": 85,
+		"name": "П характеризует\/оценивает доклад",
+		"category_id": 4,
+		"json_name": "p_characterizes_evaluates_report",
+		"created_at": "2024-01-14T04:27:14.533Z"
+	},
+	{
+		"id": 86,
+		"name": "П характеризует\/оценивает лекцию",
+		"category_id": 4,
+		"json_name": "p_characterizes_evaluates_lecture",
+		"created_at": "2024-01-14T04:27:14.700Z"
+	},
+	{
+		"id": 87,
+		"name": "П нашел книгу",
+		"category_id": 5,
+		"json_name": "p_found_book",
+		"created_at": "2024-01-14T04:27:14.845Z"
+	},
+	{
+		"id": 88,
+		"name": "П нашел рукопись",
+		"category_id": 5,
+		"json_name": "p_found_manuscript",
+		"created_at": "2024-01-14T04:27:15.051Z"
+	},
+	{
+		"id": 89,
+		"name": "П просит прислать книгу",
+		"category_id": 5,
+		"json_name": "p_requests_send_book",
+		"created_at": "2024-01-14T04:27:15.228Z"
+	},
+	{
+		"id": 90,
+		"name": "П просит прислать поэму",
+		"category_id": 5,
+		"json_name": "p_requests_send_poem",
+		"created_at": "2024-01-14T04:27:15.383Z"
+	},
+	{
+		"id": 92,
+		"name": "П пишет о получении книги",
+		"category_id": 5,
+		"json_name": "p_writes_about_receiving_book",
+		"created_at": "2024-01-14T04:27:15.670Z"
+	},
+	{
+		"id": 93,
+		"name": "П пишет о получении стихотворения",
+		"category_id": 5,
+		"json_name": "p_writes_about_receiving_poem",
+		"created_at": "2024-01-14T04:27:15.820Z"
+	},
+	{
+		"id": 94,
+		"name": "П пишет о получении поэмы",
+		"category_id": 5,
+		"json_name": "p_writes_about_receiving_poetry",
+		"created_at": "2024-01-14T04:27:15.968Z"
+	},
+	{
+		"id": 95,
+		"name": "П хвалит автора",
+		"category_id": 5,
+		"json_name": "p_praises_author",
+		"created_at": "2024-01-14T04:27:16.113Z"
+	},
+	{
+		"id": 97,
+		"name": "П характеризует\/оценивает персонажей",
+		"category_id": 5,
+		"json_name": "p_characterizes_evaluates_characters",
+		"created_at": "2024-01-14T04:27:16.436Z"
+	},
+	{
+		"id": 98,
+		"name": "П берет книгу в библиотеке",
+		"category_id": 5,
+		"json_name": "p_borrows_book_from_library",
+		"created_at": "2024-01-14T04:27:16.581Z"
+	},
+	{
+		"id": 99,
+		"name": "П не посылает книгу",
+		"category_id": 5,
+		"json_name": "p_doesnt_send_book",
+		"created_at": "2024-01-14T04:27:16.742Z"
+	},
+	{
+		"id": 101,
+		"name": "П берет книгу у знакомых",
+		"category_id": 5,
+		"json_name": "p_borrows_book_from_friends",
+		"created_at": "2024-01-14T04:27:17.067Z"
+	},
+	{
+		"id": 102,
+		"name": "П не посылает деньги",
+		"category_id": 6,
+		"json_name": "p_doesnt_send_money",
+		"created_at": "2024-01-14T04:27:17.254Z"
+	},
+	{
+		"id": 103,
+		"name": "П обещает послать деньги",
+		"category_id": 6,
+		"json_name": "p_promises_to_send_money",
+		"created_at": "2024-01-14T04:27:17.417Z"
+	},
+	{
+		"id": 105,
+		"name": "П просит прислать аванс",
+		"category_id": 6,
+		"json_name": "p_requests_send_advance",
+		"created_at": "2024-01-14T04:27:17.716Z"
+	},
+	{
+		"id": 106,
+		"name": "П пишет о получении денег",
+		"category_id": 6,
+		"json_name": "p_writes_about_receiving_money",
+		"created_at": "2024-01-14T04:27:17.869Z"
+	},
+	{
+		"id": 108,
+		"name": "П пишет о переездах",
+		"category_id": 6,
+		"json_name": "p_writes_about_moves",
+		"created_at": "2024-01-14T04:27:18.175Z"
+	},
+	{
+		"id": 109,
+		"name": "П пишет о поездках",
+		"category_id": 6,
+		"json_name": "p_writes_about_travels",
+		"created_at": "2024-01-14T04:27:18.319Z"
+	},
+	{
+		"id": 110,
+		"name": "П пишет о смене адреса",
+		"category_id": 6,
+		"json_name": "p_writes_about_change_of_address",
+		"created_at": "2024-01-14T04:27:18.492Z"
+	},
+	{
+		"id": 112,
+		"name": "П не посылает письмо",
+		"category_id": 6,
+		"json_name": "p_doesnt_send_letter",
+		"created_at": "2024-01-14T04:27:18.850Z"
+	},
+	{
+		"id": 114,
+		"name": "П просит прислать",
+		"category_id": 6,
+		"json_name": "p_requests_send",
+		"created_at": "2024-01-14T04:27:19.207Z"
+	},
+	{
+		"id": 115,
+		"name": "П обещает прислать",
+		"category_id": 6,
+		"json_name": "p_promises_to_send",
+		"created_at": "2024-01-14T04:27:19.548Z"
+	},
+	{
+		"id": 116,
+		"name": "П просит не дарить",
+		"category_id": 6,
+		"json_name": "p_requests_not_to_gift",
+		"created_at": "2024-01-14T04:27:19.710Z"
+	},
+	{
+		"id": 117,
+		"name": "П нашел документы",
+		"category_id": 6,
+		"json_name": "p_found_documents",
+		"created_at": "2024-01-14T04:27:19.858Z"
+	},
+	{
+		"id": 118,
+		"name": "П нашел бумаги",
+		"category_id": 6,
+		"json_name": "p_found_papers",
+		"created_at": "2024-01-14T04:27:20.022Z"
+	},
+	{
+		"id": 120,
+		"name": "П пишет письмо",
+		"category_id": 7,
+		"json_name": "p_writes_letter",
+		"created_at": "2024-01-14T04:27:20.326Z"
+	},
+	{
+		"id": 121,
+		"name": "П благодарит за ответ",
+		"category_id": 7,
+		"json_name": "p_thanks_for_response",
+		"created_at": "2024-01-14T04:27:20.468Z"
+	},
+	{
+		"id": 122,
+		"name": "П благодарит за письмо",
+		"category_id": 7,
+		"json_name": "p_thanks_for_letter",
+		"created_at": "2024-01-14T04:27:20.632Z"
+	},
+	{
+		"id": 124,
+		"name": "П благодарит за поздравление",
+		"category_id": 7,
+		"json_name": "p_thanks_for_congratulations",
+		"created_at": "2024-01-14T04:27:20.940Z"
+	},
+	{
+		"id": 125,
+		"name": "П благодарит за помощь",
+		"category_id": 7,
+		"json_name": "p_thanks_for_help",
+		"created_at": "2024-01-14T04:27:21.086Z"
+	},
+	{
+		"id": 126,
+		"name": "П благодарит за подарок",
+		"category_id": 7,
+		"json_name": "p_thanks_for_gift",
+		"created_at": "2024-01-14T04:27:21.247Z"
+	},
+	{
+		"id": 128,
+		"name": "П извиняется за долгое молчание",
+		"category_id": 7,
+		"json_name": "p_apologizes_for_long_silence",
+		"created_at": "2024-01-14T04:27:21.555Z"
+	},
+	{
+		"id": 130,
+		"name": "П передает привет",
+		"category_id": 7,
+		"json_name": "p_sends_greetings",
+		"created_at": "2024-01-14T04:27:21.863Z"
+	},
+	{
+		"id": 131,
+		"name": "П просит кланяться",
+		"category_id": 7,
+		"json_name": "p_requests_bowing",
+		"created_at": "2024-01-14T04:27:22.009Z"
+	},
+	{
+		"id": 132,
+		"name": "П передает поцелуи",
+		"category_id": 7,
+		"json_name": "p_sends_kisses",
+		"created_at": "2024-01-14T04:27:22.157Z"
+	},
+	{
+		"id": 133,
+		"name": "П жалуется на отсутствие ответа",
+		"category_id": 7,
+		"json_name": "p_complains_about_lack_of_response",
+		"created_at": "2024-01-14T04:27:22.310Z"
+	},
+	{
+		"id": 134,
+		"name": "П приглашает в гости",
+		"category_id": 7,
+		"json_name": "p_invites_to_visit",
+		"created_at": "2024-01-14T04:27:22.478Z"
+	},
+	{
+		"id": 135,
+		"name": "П приглашает на дачу",
+		"category_id": 7,
+		"json_name": "p_invites_to_cottage",
+		"created_at": "2024-01-14T04:27:22.639Z"
+	},
+	{
+		"id": 136,
+		"name": "П просит прочесть",
+		"category_id": 7,
+		"json_name": "p_requests_reading",
+		"created_at": "2024-01-14T04:27:22.805Z"
+	},
+	{
+		"id": 138,
+		"name": "П просит ответить",
+		"category_id": 7,
+		"json_name": "p_requests_reply",
+		"created_at": "2024-01-14T04:27:23.093Z"
+	},
+	{
+		"id": 139,
+		"name": "П просит не поздравлять",
+		"category_id": 7,
+		"json_name": "p_requests_not_to_congratulate",
+		"created_at": "2024-01-14T04:27:23.295Z"
+	},
+	{
+		"id": 140,
+		"name": "П просит не писать",
+		"category_id": 7,
+		"json_name": "p_requests_not_to_write",
+		"created_at": "2024-01-14T04:27:23.458Z"
+	},
+	{
+		"id": 111,
+		"name": "П пишет о получении посылки",
+		"category_id": 6,
+		"json_name": "p_writes_about_receiving_package",
+		"created_at": "2024-01-14T04:27:18.672Z"
+	},
+	{
+		"id": 91,
+		"name": "П просит прислать стихотворение",
+		"category_id": 5,
+		"json_name": "p_requests_send_poetry",
+		"created_at": "2024-01-14T04:27:15.527Z"
+	},
+	{
+		"id": 96,
+		"name": "П характеризует\/оценивает книгу",
+		"category_id": 5,
+		"json_name": "p_characterizes_evaluates_book",
+		"created_at": "2024-01-14T04:27:16.261Z"
+	},
+	{
+		"id": 100,
+		"name": "П обещает послать книгу",
+		"category_id": 5,
+		"json_name": "p_promises_to_send_book",
+		"created_at": "2024-01-14T04:27:16.921Z"
+	},
+	{
+		"id": 104,
+		"name": "П просит прислать деньги",
+		"category_id": 6,
+		"json_name": "p_requests_send_money",
+		"created_at": "2024-01-14T04:27:17.562Z"
+	},
+	{
+		"id": 107,
+		"name": "П жалуется на отсутствие денег",
+		"category_id": 6,
+		"json_name": "p_complains_about_lack_of_money",
+		"created_at": "2024-01-14T04:27:18.016Z"
+	},
+	{
+		"id": 113,
+		"name": "П обещает послать письмо",
+		"category_id": 6,
+		"json_name": "p_promises_to_send_letter",
+		"created_at": "2024-01-14T04:27:19.046Z"
+	},
+	{
+		"id": 119,
+		"name": "П нашел письма",
+		"category_id": 6,
+		"json_name": "p_found_letters",
+		"created_at": "2024-01-14T04:27:20.162Z"
+	},
+	{
+		"id": 123,
+		"name": "П благодарит за посылку",
+		"category_id": 7,
+		"json_name": "p_thanks_for_package",
+		"created_at": "2024-01-14T04:27:20.796Z"
+	},
+	{
+		"id": 127,
+		"name": "П благодарит за яблоки",
+		"category_id": 7,
+		"json_name": "p_thanks_for_apples",
+		"created_at": "2024-01-14T04:27:21.393Z"
+	},
+	{
+		"id": 129,
+		"name": "П извиняется за промедление с ответом",
+		"category_id": 7,
+		"json_name": "p_apologizes_for_delayed_response",
+		"created_at": "2024-01-14T04:27:21.720Z"
+	},
+	{
+		"id": 137,
+		"name": "П просит отозваться",
+		"category_id": 7,
+		"json_name": "p_requests_response",
+		"created_at": "2024-01-14T04:27:22.948Z"
+	},
+	{
+		"id": 141,
+		"name": "П просит не читать",
+		"category_id": 7,
+		"json_name": "p_requests_not_to_read",
+		"created_at": "2024-01-14T04:27:23.614Z"
+	}
+]

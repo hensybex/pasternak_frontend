@@ -1,8 +1,9 @@
 import 'package:hive/hive.dart';
+import 'package:pasternak_frontend/models/hive_type_ids.dart';
 
 part 'letter.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: HiveTypeIds.letter)
 class Letter extends HiveObject {
   @HiveField(0)
   final int id;

@@ -99,7 +99,7 @@ class CustomTextWidget extends StatelessWidget {
   }
 
   void checkHypothesisInfo(int hypothesisId) async {
-    var hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfoBox');
+    var hypothesesInfoBox = Hive.box<HypothesisInfo>('hypotheses_info');
 
     for (HypothesisInfo hypothesisInfo in hypothesesInfoBox.values) {
       if (hypothesisInfo.id == hypothesisId) {
@@ -110,7 +110,7 @@ class CustomTextWidget extends StatelessWidget {
   }
 
   String getHypothesisName(int hypothesisId) {
-    Box<HypothesisInfo> hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfo');
+    Box<HypothesisInfo> hypothesesInfoBox = Hive.box<HypothesisInfo>('hypotheses_info');
 
     //var hypothesisInfo = hypothesesInfoBox.values.firstWhere(hypothesisId);
     HypothesisInfo? hypothesisInfo = hypothesesInfoBox.values.firstWhere(

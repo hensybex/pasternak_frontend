@@ -8,7 +8,7 @@ part of 'letter_composite.dart';
 
 class LetterCompositeAdapter extends TypeAdapter<LetterComposite> {
   @override
-  final int typeId = 1;
+  final int typeId = 5;
 
   @override
   LetterComposite read(BinaryReader reader) {

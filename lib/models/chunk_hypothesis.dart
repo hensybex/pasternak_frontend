@@ -1,12 +1,27 @@
-class ChunkHypothesis {
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pasternak_frontend/models/hive_type_ids.dart';
+
+part 'chunk_hypothesis.g.dart';
+
+@HiveType(typeId: HiveTypeIds.chunkHypothesis)
+class ChunkHypothesis extends HiveObject {
+  @HiveField(0)
   final int letterChunkId;
+  @HiveField(1)
   final int hypothesisId;
+  @HiveField(2)
   final String proof;
+  @HiveField(3)
   final int version;
+  @HiveField(4)
   bool accepted;
+  @HiveField(5)
   final int quoteStart;
+  @HiveField(6)
   final int quoteEnd;
+  @HiveField(7)
   final bool incomplete;
+  @HiveField(8)
   final DateTime createdAt;
 
   ChunkHypothesis({

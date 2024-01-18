@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
+import 'hive_type_ids.dart';
+
 part 'letter_composite.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: HiveTypeIds.letterComposite)
 class LetterComposite extends HiveObject {
   @HiveField(0)
   final int id;
@@ -50,7 +52,7 @@ class LetterComposite extends HiveObject {
   factory LetterComposite.fromMap(Map<String, dynamic> map) {
     // Convert the hypothesesCounts from List to Map<int, int>
     Map<int, int> hypothesesCounts = {};
-    var hypothesesCountsRaw = map['hypothesesCounts'];
+    var hypothesesCountsRaw = map['hypotheses_counts'];
 
     if (hypothesesCountsRaw != null) {
       if (hypothesesCountsRaw is String) {
@@ -62,13 +64,20 @@ class LetterComposite extends HiveObject {
       }
     }
 
+    String categoriesIdsRaw = map['categories_ids'] as String? ?? '';
+    List<int> categoriesIds = [];
+    if (categoriesIdsRaw.isNotEmpty) {
+      // Remove curly braces and split the string
+      categoriesIds = categoriesIdsRaw.substring(1, categoriesIdsRaw.length - 1).split(',').map((id) => int.tryParse(id) ?? 0).toList();
+    }
+
     return LetterComposite(
       id: map['id'] ?? 0,
-      sentTo: map['sentTo'] ?? '',
-      sentAt: map['sentAt'] ?? '',
+      sentTo: map['sent_to'] ?? '',
+      sentAt: map['sent_at'] ?? '',
       location: map['location'] ?? '',
       brief: map['brief'] ?? '',
-      categoriesIds: (map['categoriesIds'] as List<dynamic>).cast<int>(),
+      categoriesIds: categoriesIds,
       hypothesesCounts: hypothesesCounts,
       year: map['year'] ?? '',
     );

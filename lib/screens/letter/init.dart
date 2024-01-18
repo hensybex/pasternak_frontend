@@ -6,45 +6,55 @@ import 'package:provider/provider.dart';
 import '../../models/chunk_hypothesis.dart';
 import '../../models/letter.dart';
 import '../../models/letter_chunk.dart';
-import '../../services/letters_service.dart';
 import 'letter_screen_provider.dart';
 
 class LetterScreenInitializer {
   Future<void> initializeData(BuildContext context, int letterId) async {
-    final LetterScreenProvider letterScreenProvider = Provider.of<LetterScreenProvider>(context, listen: false);
-    final ListLettersProvider listLettersProvider = Provider.of<ListLettersProvider>(context, listen: false);
-    LettersService lettersService = LettersService();
+    try {
+      final LetterScreenProvider letterScreenProvider = Provider.of<LetterScreenProvider>(context, listen: false);
+      final ListLettersProvider listLettersProvider = Provider.of<ListLettersProvider>(context, listen: false);
 
-    // Fetch letter chunks and chunk hypotheses for the given letter
-    Letter fetchedLetter = await lettersService.fetchLetterById(letterId);
-    List<LetterChunk> letterChunks = await lettersService.fetchLetterChunks(letterId);
+      // Retrieve the letter and its chunks from Hive
 
-    List<List<ChunkHypothesis>> listsOfHypotheses = [];
+      final Box<Letter> lettersBox = await Hive.openBox<Letter>('letters');
+      print("OPENED LETTER BOX");
+      Letter fetchedLetter = lettersBox.values.firstWhere((letter) => letter.id == letterId);
 
-    Box<HypothesisInfo> hypothesesInfoBox = Hive.box<HypothesisInfo>('hypothesesInfo');
+      Box<LetterChunk> letterChunksBox = Hive.box<LetterChunk>('letter_chunks');
+      List<LetterChunk> letterChunks = letterChunksBox.values.where((chunk) => chunk.letterId == letterId).toList();
 
-    List<HypothesisInfo> hypothesesInfo = [];
+      List<List<ChunkHypothesis>> listsOfHypotheses = [];
+      final Box<HypothesisInfo> hypothesesInfoBox = await Hive.openBox<HypothesisInfo>('hypotheses_info');
+      print("OPENED HYPOTHESESINFO BOX");
+      List<HypothesisInfo> hypothesesInfo = [];
 
-    for (LetterChunk letterChunk in letterChunks) {
-      try {
-        List<ChunkHypothesis> chunkHypotheses = await lettersService.fetchChunkHypotheses(letterChunk.id);
-        listsOfHypotheses.add(chunkHypotheses);
-        for (ChunkHypothesis chunkHypothesis in chunkHypotheses) {
-          // Retrieve the HypothesisInfo using hypothesisId
-          HypothesisInfo? info = hypothesesInfoBox.values.firstWhere(
-            (h) => h.id == chunkHypothesis.hypothesisId,
-          );
-          hypothesesInfo.add(info);
+      for (LetterChunk letterChunk in letterChunks) {
+        try {
+          // Assuming you have a Box for ChunkHypothesis
+          final Box<ChunkHypothesis> chunkHypothesesBox = await Hive.openBox<ChunkHypothesis>('chunk_hypotheses');
+          print("OPENED CHUNK HYPOTHESES BOX");
+          List<ChunkHypothesis> chunkHypotheses =
+              chunkHypothesesBox.values.where((hypothesis) => hypothesis.letterChunkId == letterChunk.id).toList();
+          listsOfHypotheses.add(chunkHypotheses);
+
+          for (ChunkHypothesis chunkHypothesis in chunkHypotheses) {
+            // Retrieve the HypothesisInfo using hypothesisId
+            HypothesisInfo info = hypothesesInfoBox.values.firstWhere((h) => h.id == chunkHypothesis.hypothesisId);
+            hypothesesInfo.add(info);
+          }
+        } catch (e) {
+          print(e);
         }
-      } catch (e) {
-        print(e);
       }
-    }
 
-    letterScreenProvider.setLetterChunks(letterChunks);
-    letterScreenProvider.setChunkHypotheses(listsOfHypotheses);
-    letterScreenProvider.setLetter(fetchedLetter);
-    letterScreenProvider.setHypotheses(listLettersProvider.selectedHypothesesIds);
-    letterScreenProvider.setHypothesesInfo(hypothesesInfo);
+      letterScreenProvider.setLetter(fetchedLetter);
+      letterScreenProvider.setLetterChunks(letterChunks);
+      letterScreenProvider.setChunkHypotheses(listsOfHypotheses);
+      letterScreenProvider.setHypotheses(listLettersProvider.selectedHypothesesIds);
+      letterScreenProvider.setHypothesesInfo(hypothesesInfo);
+    } catch (e) {
+      print("ERROR IN LETTER INIT");
+      print(e);
+    }
   }
 }

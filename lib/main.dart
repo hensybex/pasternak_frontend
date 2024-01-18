@@ -3,9 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pasternak_frontend/main_initializer.dart';
 import 'package:pasternak_frontend/models/category_info.dart';
+import 'package:pasternak_frontend/models/chunk_hypothesis.dart';
 import 'package:pasternak_frontend/models/hypothesis_info.dart';
+import 'package:pasternak_frontend/models/letter_chunk.dart';
 import 'package:pasternak_frontend/models/letter_composite.dart';
-import 'package:pasternak_frontend/services/version_service.dart';
+//import 'package:pasternak_frontend/services/version_service.dart';
 import 'package:provider/provider.dart';
 import 'models/letter.dart';
 import 'screens/letter/letter_screen_provider.dart';
@@ -22,13 +24,21 @@ void main() async {
   Hive.registerAdapter(LetterCompositeAdapter());
   Hive.registerAdapter(CategoryInfoAdapter());
   Hive.registerAdapter(HypothesisInfoAdapter());
+  Hive.registerAdapter(LetterChunkAdapter());
+  Hive.registerAdapter(ChunkHypothesisAdapter());
   var versionBox = await Hive.openBox('versionBox');
   String localVersion = versionBox.get('version', defaultValue: '0');
-  VersionService versionService = VersionService();
-  String serverVersion = await versionService.fetchServerVersion();
+  //VersionService versionService = VersionService();
+  //String serverVersion = await versionService.fetchServerVersion();
+  String serverVersion = "1.0";
 
+  print("CHECKING VERSIONS");
+  print(serverVersion);
+  print(localVersion);
   if (localVersion != serverVersion) {
+    print("IM HERE");
     await initializeData();
+    print("AFTER INITIALIZATION");
     versionBox.put('version', serverVersion);
   }
 

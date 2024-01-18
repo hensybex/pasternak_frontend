@@ -13,9 +13,9 @@ class ListLettersInitializer {
 
     try {
       // Open Hive boxes
-      var letterCompositeBox = await Hive.openBox<LetterComposite>('letterComposites');
-      var hypothesesInfoBox = await Hive.openBox<HypothesisInfo>('hypothesesInfo');
-      var categoryInfoBox = await Hive.openBox<CategoryInfo>('categoriesInfo');
+      var letterCompositeBox = await Hive.openBox<LetterComposite>('letter_composites');
+      var hypothesesInfoBox = await Hive.openBox<HypothesisInfo>('hypotheses_info');
+      var categoryInfoBox = await Hive.openBox<CategoryInfo>('categories_info');
 
       // Retrieve data from Hive boxes
       List<LetterComposite> fetchedComposites = letterCompositeBox.values.toList();
