@@ -5,8 +5,8 @@ import '../models/letter_composite.dart';
 
 class LetterCompositeService {
   // The URL of your endpoint
-  static const String _baseUrl = 'http://localhost:8080/api';
-  //static const String _baseUrl = 'https://pasternak-gpt.duckdns.org/api';
+  //static const String _baseUrl = 'http://localhost:8080/api';
+  static const String _baseUrl = 'http://pasternak-gpt.duckdns.org/api';
 
   // Fetch LetterComposites from the server
   Future<List<LetterComposite>> fetchLetterComposites(int pageIndex, int pageSize) async {

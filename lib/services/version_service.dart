@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 // Import the Letter model
 
 class VersionService {
-  static const String _baseUrl = 'http://localhost:8080/api';
-  //static const String _baseUrl = 'https://pasternak-gpt.duckdns.org/api';
+  //static const String _baseUrl = 'http://localhost:8080/api';
+  static const String _baseUrl = 'http://pasternak-gpt.duckdns.org/api';
 
   Future<String> fetchServerVersion() async {
     try {
