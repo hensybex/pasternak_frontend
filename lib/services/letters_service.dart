@@ -40,13 +40,9 @@ class LettersService {
         var data = json.decode(response.body);
         return Letter.fromMap(data);
       } else if (response.statusCode == 404) {
-        print("IM HERE!");
-        print(response.body);
         // Handle no more letters
         return Letter(id: 0, createdAt: DateTime.now());
       } else {
-        print("IM HERE2!");
-        print(response.body);
         throw Exception('Failed to load letter');
       }
     } catch (e) {

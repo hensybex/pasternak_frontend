@@ -17,22 +17,19 @@ class LetterScreenInitializer {
       // Retrieve the letter and its chunks from Hive
 
       final Box<Letter> lettersBox = await Hive.openBox<Letter>('letters');
-      print("OPENED LETTER BOX");
       Letter fetchedLetter = lettersBox.values.firstWhere((letter) => letter.id == letterId);
 
-      Box<LetterChunk> letterChunksBox = Hive.box<LetterChunk>('letter_chunks');
+      final Box<LetterChunk> letterChunksBox = await Hive.openBox<LetterChunk>('letter_chunks');
       List<LetterChunk> letterChunks = letterChunksBox.values.where((chunk) => chunk.letterId == letterId).toList();
 
       List<List<ChunkHypothesis>> listsOfHypotheses = [];
       final Box<HypothesisInfo> hypothesesInfoBox = await Hive.openBox<HypothesisInfo>('hypotheses_info');
-      print("OPENED HYPOTHESESINFO BOX");
       List<HypothesisInfo> hypothesesInfo = [];
 
       for (LetterChunk letterChunk in letterChunks) {
         try {
           // Assuming you have a Box for ChunkHypothesis
           final Box<ChunkHypothesis> chunkHypothesesBox = await Hive.openBox<ChunkHypothesis>('chunk_hypotheses');
-          print("OPENED CHUNK HYPOTHESES BOX");
           List<ChunkHypothesis> chunkHypotheses =
               chunkHypothesesBox.values.where((hypothesis) => hypothesis.letterChunkId == letterChunk.id).toList();
           listsOfHypotheses.add(chunkHypotheses);

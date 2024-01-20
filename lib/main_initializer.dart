@@ -16,7 +16,7 @@ import '../../models/hypothesis_info.dart';
 Future<void> initializeData() async {
   try {
     print("Start of initialization");
-    String jsonString = await rootBundle.loadString('categories.json');
+    String jsonString = await rootBundle.loadString('assets/categories.json');
     List<dynamic> jsonData = json.decode(jsonString);
     final Box<CategoryInfo> categoriesBox = await Hive.openBox<CategoryInfo>('categories_info');
     await categoriesBox.clear();
@@ -25,7 +25,7 @@ Future<void> initializeData() async {
 
     print("Processed categories");
 
-    jsonString = await rootBundle.loadString('chunk_hypotheses.json');
+    jsonString = await rootBundle.loadString('assets/chunk_hypotheses.json');
     jsonData = json.decode(jsonString);
     final Box<ChunkHypothesis> chunkHypothesesBox = await Hive.openBox<ChunkHypothesis>('chunk_hypotheses');
     await chunkHypothesesBox.clear();
@@ -34,7 +34,7 @@ Future<void> initializeData() async {
 
     print("Processed chunk_hypotheses");
 
-    jsonString = await rootBundle.loadString('hypotheses.json');
+    jsonString = await rootBundle.loadString('assets/hypotheses.json');
     jsonData = json.decode(jsonString);
     final Box<HypothesisInfo> hypothesesBox = await Hive.openBox<HypothesisInfo>('hypotheses_info');
     await hypothesesBox.clear();
@@ -43,7 +43,7 @@ Future<void> initializeData() async {
 
     print("Processed hypotheses");
 
-    jsonString = await rootBundle.loadString('letter_chunks.json');
+    jsonString = await rootBundle.loadString('assets/letter_chunks.json');
     jsonData = json.decode(jsonString);
     final Box<LetterChunk> letterChunksBox = await Hive.openBox<LetterChunk>('letter_chunks');
     await letterChunksBox.clear();
@@ -52,7 +52,7 @@ Future<void> initializeData() async {
 
     print("Processed letter_chunks");
 
-    jsonString = await rootBundle.loadString('letter_composites.json');
+    jsonString = await rootBundle.loadString('assets/letter_composites.json');
     jsonData = json.decode(jsonString);
     final Box<LetterComposite> letterCompositesBox = await Hive.openBox<LetterComposite>('letter_composites');
     await letterCompositesBox.clear();
@@ -61,7 +61,7 @@ Future<void> initializeData() async {
 
     print("Processed letter_composites");
 
-    jsonString = await rootBundle.loadString('letters.json');
+    jsonString = await rootBundle.loadString('assets/letters.json');
     jsonData = json.decode(jsonString);
     final Box<Letter> lettersBox = await Hive.openBox<Letter>('letters');
     await lettersBox.clear();

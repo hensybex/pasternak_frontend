@@ -62,17 +62,18 @@ class _LetterScreenState extends State<LetterScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isExpanded = !_isExpanded;
-                        });
-                      },
-                      child: Text(
-                        _isExpanded ? 'Скрыть фильтры' : 'Показать фильтры',
-                        style: const TextStyle(fontFamily: 'Open Sans'),
+                    if (letterScreenProvider.hypothesesInfo.isNotEmpty)
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _isExpanded = !_isExpanded;
+                          });
+                        },
+                        child: Text(
+                          _isExpanded ? 'Скрыть фильтры' : 'Показать фильтры',
+                          style: const TextStyle(fontFamily: 'Open Sans'),
+                        ),
                       ),
-                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -99,7 +100,7 @@ class _LetterScreenState extends State<LetterScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(
+                      child: SelectableText(
                         letterScreenProvider.letter.letterNotes,
                         style: const TextStyle(fontFamily: 'Merriweather'),
                       ),
@@ -118,28 +119,26 @@ class _LetterScreenState extends State<LetterScreen> {
       child: Consumer<LetterScreenProvider>(
         builder: (context, letterScreenProvider, child) {
           List<HypothesisInfo> sortedHypotheses = List<HypothesisInfo>.from(letterScreenProvider.hypothesesInfo);
-          return Expanded(
-            child: ListView(
-              children: sortedHypotheses.map((entry) {
-                bool isSelected = letterScreenProvider.selectedHypotheses.contains(entry.id);
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      letterScreenProvider.toggleHypothesisSelection(entry.id);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: isSelected ? Colors.blue : Colors.grey,
-                    ),
-                    child: Text(
-                      entry.name,
-                      style: const TextStyle(fontFamily: 'Open Sans'),
-                    ),
+          return ListView(
+            children: sortedHypotheses.map((entry) {
+              bool isSelected = letterScreenProvider.selectedHypotheses.contains(entry.id);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    letterScreenProvider.toggleHypothesisSelection(entry.id);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: isSelected ? Colors.blue : Colors.grey,
                   ),
-                );
-              }).toList(),
-            ),
+                  child: Text(
+                    entry.name,
+                    style: const TextStyle(fontFamily: 'Open Sans'),
+                  ),
+                ),
+              );
+            }).toList(),
           );
         },
       ),

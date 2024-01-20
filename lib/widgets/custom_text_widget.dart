@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,8 @@ class CustomTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
+    return SelectableText.rich(
+      TextSpan(
         children: _buildTextSpans(context),
         style: const TextStyle(
           fontFamily: 'PT Serif',
@@ -29,6 +30,8 @@ class CustomTextWidget extends StatelessWidget {
 
   List<InlineSpan> _buildTextSpans(BuildContext context) {
     List<InlineSpan> spans = [];
+    OverlayEntry? hoverPopupEntry;
+    bool isHovering = false;
 
     final LetterScreenProvider letterScreenProvider = Provider.of<LetterScreenProvider>(context, listen: false);
 
@@ -68,22 +71,50 @@ class CustomTextWidget extends StatelessWidget {
 
         // Hypothesis text
         var hypothesisText = chunk.chunk.substring(hypothesis.quoteStart, end);
-        spans.add(WidgetSpan(
-          child: GestureDetector(
-            onTap: () => _showHypothesisPopup(context, consolidatedNames),
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Consumer<LetterScreenProvider>(builder: (context, letterScreenProvider, child) {
-                return Text(
-                  hypothesisText,
-                  style: TextStyle(
-                    backgroundColor: isAnyHypothesisSelected ? Colors.blue : Colors.grey,
-                    fontFamily: 'PT Serif',
-                  ),
-                );
-              }),
-            ),
+        /* spans.add(WidgetSpan(
+          child: MouseRegion(
+            onHover: (PointerHoverEvent event) {
+              if (!isHovering) {
+                isHovering = true;
+                if (hoverPopupEntry != null) {
+                  hoverPopupEntry!.remove();
+                }
+                hoverPopupEntry = _createPopupOverlay(context, consolidatedNames, event.position);
+                Overlay.of(context).insert(hoverPopupEntry!);
+              }
+            },
+            onExit: (PointerExitEvent event) {
+              isHovering = false;
+              hoverPopupEntry?.remove();
+              hoverPopupEntry = null;
+            },
+            child: Consumer<LetterScreenProvider>(builder: (context, letterScreenProvider, child) {
+              return Text(
+                hypothesisText,
+                style: TextStyle(
+                  backgroundColor: isAnyHypothesisSelected ? Colors.blue : Colors.grey,
+                  fontFamily: 'PT Serif',
+                ),
+              );
+            }),
           ),
+        )); */
+
+        spans.add(TextSpan(
+          text: hypothesisText,
+          style: TextStyle(
+            backgroundColor: isAnyHypothesisSelected ? Colors.blue : Colors.grey,
+            fontFamily: 'PT Serif',
+          ),
+          onEnter: (event) {
+            hoverPopupEntry = _createPopupOverlay(context, consolidatedNames, event.position);
+            Overlay.of(context).insert(hoverPopupEntry!);
+          },
+          onExit: (event) {
+            isHovering = false;
+            hoverPopupEntry?.remove();
+            hoverPopupEntry = null;
+          },
         ));
 
         currentIndex = end;
@@ -103,7 +134,6 @@ class CustomTextWidget extends StatelessWidget {
 
     for (HypothesisInfo hypothesisInfo in hypothesesInfoBox.values) {
       if (hypothesisInfo.id == hypothesisId) {
-        print('TRUE ${hypothesisInfo.name}');
         break; // Exit the loop once the matching ID is found
       }
     }
@@ -132,6 +162,22 @@ class CustomTextWidget extends StatelessWidget {
           // Other dialog properties
         );
       },
+    );
+  }
+
+  OverlayEntry _createPopupOverlay(BuildContext context, String text, Offset position) {
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        left: position.dx,
+        top: position.dy,
+        child: Material(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            color: Colors.white,
+            child: Text(text),
+          ),
+        ),
+      ),
     );
   }
 }

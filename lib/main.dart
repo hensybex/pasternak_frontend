@@ -32,13 +32,8 @@ void main() async {
   //String serverVersion = await versionService.fetchServerVersion();
   String serverVersion = "1.0";
 
-  print("CHECKING VERSIONS");
-  print(serverVersion);
-  print(localVersion);
   if (localVersion != serverVersion) {
-    print("IM HERE");
     await initializeData();
-    print("AFTER INITIALIZATION");
     versionBox.put('version', serverVersion);
   }
 
